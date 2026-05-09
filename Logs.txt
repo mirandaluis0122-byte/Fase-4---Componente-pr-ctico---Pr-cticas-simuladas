@@ -1,7 +1,243 @@
-#Luis Fernando Miranda Cárdenas
-# Grupo 213022_192
-# Programa Ingeniería de Sistemas
-# Universidad Nacional Abierta y a Distancia UNAD
-# Tarea 3: Modelos de herencia, polimorfismo y gestión de métodos
-# Fecha: 2026-05-10
+from modelos.cliente import Cliente
+from modelos.reserva import Reserva
+from modelos.excepciones import *
 
+from servicios.reserva_sala import ReservaSala
+from servicios.alquiler_equipo import AlquilerEquipo
+from servicios.asesoria import Asesoria
+
+from utilidades.logger import registrar_log
+
+
+clientes = []
+reservas = []
+
+
+def ejecutar_operaciones():
+
+    registrar_log("===== INICIO DEL SISTEMA =====")
+
+    operaciones = [
+
+        lambda: Cliente(
+            "Luis",
+            "luis@gmail.com",
+            "3001234567"
+        ),
+
+        lambda: Cliente(
+            "Ana",
+            "ana@gmail.com",
+            "3019876543"
+        ),
+
+        # ERROR CLIENTE
+        lambda: Cliente(
+            "Li",
+            "correo_invalido",
+            "abc123"
+        ),
+
+        lambda: ReservaSala(
+            "Sala VIP",
+            50000,
+            20
+        ),
+
+        lambda: AlquilerEquipo(
+            "Portátiles",
+            30000,
+            "Computadores"
+        ),
+
+        lambda: Asesoria(
+            "Asesoría Python",
+            80000,
+            "Programación"
+        ),
+
+        # ERROR SERVICIO
+        lambda: ReservaSala(
+            "Sala Error",
+            40000,
+            10
+        ).calcular_costo(-5),
+
+        lambda: Reserva(
+            Cliente(
+                "Carlos",
+                "carlos@gmail.com",
+                "3111111111"
+            ),
+
+            ReservaSala(
+                "Sala Premium",
+                60000,
+                30
+            ),
+
+            5
+        ),
+
+        # ERROR RESERVA
+        lambda: Reserva(
+            Cliente(
+                "Pedro",
+                "pedro@gmail.com",
+                "3222222222"
+            ),
+
+            Asesoria(
+                "IA",
+                100000,
+                "Inteligencia Artificial"
+            ),
+
+            -3
+        ),
+
+        # ERROR DURACIÓN
+        lambda: Reserva(
+            Cliente(
+                "María",
+                "maria@gmail.com",
+                "3333333333"
+            ),
+
+            AlquilerEquipo(
+                "Cámaras",
+                20000,
+                "Video"
+            ),
+
+            0
+        )
+    ]
+
+
+    for i, operacion in enumerate(
+        operaciones,
+        start=1
+    ):
+
+        try:
+
+            registrar_log(
+                f"Ejecutando operación {i}"
+            )
+
+            resultado = operacion()
+
+            if isinstance(resultado, Cliente):
+
+                clientes.append(resultado)
+
+                registrar_log(
+                    f"Cliente registrado: {resultado.nombre}"
+                )
+
+                print(
+                    resultado.mostrar_info()
+                )
+
+            elif isinstance(resultado, Reserva):
+
+                costo = resultado.procesar_reserva()
+
+                reservas.append(resultado)
+
+                registrar_log(
+                    f"Reserva confirmada para: {resultado.cliente.nombre}"
+                )
+
+                registrar_log(
+                    f"Costo calculado: ${costo}"
+                )
+
+                print(
+                    f"Reserva procesada correctamente"
+                )
+
+            else:
+
+                registrar_log(
+                    "Servicio creado correctamente"
+                )
+
+                print(
+                    "Operación ejecutada correctamente"
+                )
+
+        except ClienteError as error_cliente:
+
+            registrar_log(
+                f"ERROR CLIENTE: {error_cliente}"
+            )
+
+            print(
+                f"Error cliente: {error_cliente}"
+            )
+
+        except ServicioError as error_servicio:
+
+            registrar_log(
+                f"ERROR SERVICIO: {error_servicio}"
+            )
+
+            print(
+                f"Error servicio: {error_servicio}"
+            )
+
+        except ReservaError as error_reserva:
+
+            registrar_log(
+                f"ERROR RESERVA: {error_reserva}"
+            )
+
+            print(
+                f"Error reserva: {error_reserva}"
+            )
+
+        except Exception as error_general:
+
+            registrar_log(
+                f"ERROR GENERAL: {error_general}"
+            )
+
+            print(
+                f"Error inesperado: {error_general}"
+            )
+
+        finally:
+
+            registrar_log(
+                f"Finalizó operación {i}"
+            )
+
+
+    registrar_log(
+        "===== FIN DEL SISTEMA ====="
+    )
+
+
+if __name__ == "__main__":
+
+    try:
+
+        ejecutar_operaciones()
+
+    except Exception as error_critico:
+
+        registrar_log(
+            f"ERROR CRÍTICO DEL SISTEMA: {error_critico}"
+        )
+
+    finally:
+
+        registrar_log(
+            "Sistema cerrado correctamente"
+        )
+
+        print(
+            "\nSistema finalizado correctamente"
+        )
