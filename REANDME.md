@@ -1,10 +1,10 @@
-# Fase-4---Componente-pr-ctico---Pr-cticas-simuladas
+# Software FJ
 
 ## Sistema Integral de Gestión de Clientes, Servicios y Reservas
 
 Proyecto desarrollado legítimamente por **Luis Miranda** para la implementación de Programación Orientada a Objetos (POO) en Python, aplicando abstracción, herencia, polimorfismo, encapsulación y manejo avanzado de excepciones.
 
-----
+---
 
 # Autor
 
@@ -91,4 +91,3 @@ Abrir la terminal en Visual Studio Code y ejecutar:
 
 ```bash
 python main.py
-...
