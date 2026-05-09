@@ -4,14 +4,12 @@
 
 Proyecto desarrollado legítimamente por **Luis Miranda** para la implementación de Programación Orientada a Objetos (POO) en Python, aplicando abstracción, herencia, polimorfismo, encapsulación y manejo avanzado de excepciones.
 
-----
 
 # Autor
 
 **Luis Miranda**  
 Desarrollador del proyecto y responsable de la implementación completa del sistema.
 
----
 
 # Descripción del Proyecto
 
@@ -29,7 +27,6 @@ Todo el sistema fue desarrollado sin bases de datos, utilizando únicamente:
 - Listas
 - Archivos de logs
 
----
 
 # Tecnologías Utilizadas
 
@@ -39,7 +36,6 @@ Todo el sistema fue desarrollado sin bases de datos, utilizando únicamente:
 - Programación Orientada a Objetos
 - Manejo avanzado de excepciones
 
----
 
 # Conceptos Aplicados
 
@@ -71,7 +67,6 @@ Implementación de:
 - excepciones personalizadas
 - encadenamiento de excepciones
 
----
 
 # Funcionalidades del Sistema
 
@@ -83,7 +78,6 @@ Implementación de:
 - Registro automático de errores
 - Continuidad del sistema ante fallos
 
----
 
 # Ejecución del Proyecto
 
